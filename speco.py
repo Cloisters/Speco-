@@ -6,7 +6,7 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 
 # Manually define a list of available voices
-available_voices = {"English - Emily": "en", "Spanish - Maria": "es", "French - Adele": "fr", "German - Lina": "de", "Italian - Isabella": "it"}
+available_voices = {"English - Emily": "en", "Spanish - Maria": "es", "French - Adele": "fr", "German - Lina": "de", "Italian - Denta": "it"}
 
 # Function to display available voices
 def show_available_voices():
