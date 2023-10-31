@@ -6,12 +6,11 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 
 # Manually define a list of available voices
-available_voices = ["en", "es", "fr", "de", "it"]
-vocals = ["English - Emily", "Spanish - Maria", "French - Adele", "German - Lina", "Italian - Isabella"]
+available_voices = {"English - Emily": "en", "Spanish - Maria": "es", "French - Adele": "fr", "German - Lina": "de", "Italian - Isabella": "it"}
 
 # Function to display available voices
 def show_available_voices():
-    available_voices_str = "\n".join(vocals)
+    available_voices_str = "\n".join(available_voices.keys())
     tk.messagebox.showinfo("Available Voices", available_voices_str)
 
 def text_to_speech():
@@ -23,7 +22,7 @@ def text_to_speech():
             text = file.read()
 
         # Voice (language) selection
-        voice = voice_var.get().split(" - ")[0]
+        selected_voice = voice_var.get()
 
         # Create a progress bar
         progress_bar = ttk.Progressbar(root, length=200, mode='indeterminate')
@@ -31,7 +30,7 @@ def text_to_speech():
         progress_bar.start()
 
         # Saving the converted audio in a file
-        tts = gTTS(text=text, lang=voice, slow=False)
+        tts = gTTS(text=text, lang=available_voices[selected_voice], slow=False)
         tts.save("output.mp3")
 
         # Stop the progress bar
@@ -71,7 +70,7 @@ show_voices_button = ttk.Button(voice_frame, text="Show Available Voices", comma
 show_voices_button.pack(side=tk.LEFT)
 
 # OptionMenu for voice (language) selection
-voice_dropdown = ttk.Combobox(voice_frame, textvariable=voice_var, values=vocals, state="readonly")
+voice_dropdown = ttk.Combobox(voice_frame, textvariable=voice_var, values=list(available_voices.keys()), state="readonly")
 voice_dropdown.pack(side=tk.LEFT)
 
 # Create a button to select the text file
